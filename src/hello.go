@@ -51,4 +51,10 @@ func startMonitoring() {
 	response, error := http.Get(site)
 	fmt.Println("Response:", response)
 	fmt.Println("Error:", error)
+
+	if response.StatusCode >= 200 && response.StatusCode < 300 {
+		fmt.Println("Site is up!")
+	} else {
+		fmt.Println("Site is down!")
+	}
 }
