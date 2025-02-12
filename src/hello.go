@@ -54,7 +54,7 @@ func readCommandLine() int {
 
 func startMonitoring() {
 	fmt.Println("Monitoring...")
-	sites := []string {"https://leosantos.me", "https://the-internet.herokuapp.com/status_codes/500"}
+	sites := readSitesFromFile("sites.txt")
 	
 	for i := 0; i < monitoringTimes; i++ {
 		for _, site := range sites {
@@ -67,10 +67,29 @@ func startMonitoring() {
 }
 
 func healthCheck(site string) string {
-	res, _ := http.Get(site)
+	res, err := http.Get(site)
+	
+	if err != nil {
+        return "Error making request to " + site + ": " + err.Error()
+    }
+
 	if res.StatusCode >= 200 && res.StatusCode < 300 {
         return "Site " + site + " is up!"
     } else {
         return "Site " + site + " is down!"
     }
+}
+
+func readSitesFromFile(filename string) []string {
+	file, err := os.Open(filename)
+
+	if err != nil {
+		fmt.Println("Error opening file:", err)
+        os.Exit(1)
+	}
+	
+	fmt.Println(file)
+
+	var sites []string
+	return sites
 }
