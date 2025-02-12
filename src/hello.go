@@ -2,9 +2,12 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"os"
 	"net/http"
 	"time"
+	"bufio"
+	"strings"
 )
 
 const monitoringTimes = 3
@@ -82,14 +85,22 @@ func healthCheck(site string) string {
 
 func readSitesFromFile(filename string) []string {
 	file, err := os.Open(filename)
-
 	if err != nil {
 		fmt.Println("Error opening file:", err)
         os.Exit(1)
 	}
+	reader := bufio.NewReader(file)
 	
-	fmt.Println(file)
-
 	var sites []string
+	
+	for {
+		line, err := reader.ReadString('\n')
+		line = strings.TrimSpace(line)
+		sites = append(sites, line)
+		if err == io.EOF {
+			break
+		}
+	}
+
 	return sites
 }
