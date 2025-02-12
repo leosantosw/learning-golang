@@ -3,12 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	name := "Leo"
-	version := 1.0
-	
-	fmt.Println("Olá,", name)
-	fmt.Println("Este programa está na versão", version)
-
+	showIntroduction()
 	fmt.Println("1 - Iniciar monitoramento")
 	fmt.Println("2 - Exibir logs")
 	fmt.Println("3 - Sair do programa")
@@ -27,4 +22,12 @@ func main() {
 		default:
 			fmt.Println("Comando inválido.")
 	}
+}
+
+func showIntroduction() {
+	name := "Leo"
+	version := 1.0
+	
+	fmt.Println("Olá,", name)
+	fmt.Println("Este programa está na versão", version)
 }
