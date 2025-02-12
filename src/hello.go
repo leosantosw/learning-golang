@@ -4,9 +4,7 @@ import "fmt"
 
 func main() {
 	showIntroduction()
-	fmt.Println("1 - Iniciar monitoramento")
-	fmt.Println("2 - Exibir logs")
-	fmt.Println("3 - Sair do programa")
+	showMenu()
 
 	command := readCommandLine()
 
@@ -28,6 +26,12 @@ func showIntroduction() {
 	
 	fmt.Println("Olá,", name)
 	fmt.Println("Este programa está na versão", version)
+}
+
+func showMenu() {
+	fmt.Println("1 - Iniciar monitoramento")
+	fmt.Println("2 - Exibir logs")
+	fmt.Println("3 - Sair do programa")
 }
 
 func readCommandLine() int {
