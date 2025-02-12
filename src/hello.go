@@ -8,6 +8,7 @@ import (
 	"time"
 	"bufio"
 	"strings"
+	"strconv"
 )
 
 const monitoringTimes = 3
@@ -15,7 +16,7 @@ const monitoringInterval = 5
 
 func main() {
 	showIntroduction()
-
+	
 	for {
 		showMenu() 
 		command := readCommandLine()
@@ -77,8 +78,10 @@ func healthCheck(site string) string {
     }
 
 	if res.StatusCode >= 200 && res.StatusCode < 300 {
+		registerLog(site, true)
         return "Site " + site + " is up!"
     } else {
+		registerLog(site, false)
         return "Site " + site + " is down!"
     }
 }
@@ -103,4 +106,13 @@ func readSitesFromFile(filename string) []string {
 	}
 
 	return sites
+}
+
+func registerLog(site string, status bool) {
+	file, err := os.OpenFile("log.txt", os.O_RDWR | os.O_CREATE | os.O_APPEND, 0666)
+	if err != nil {
+		fmt.Println("Could not open log file", err)
+	}
+	file.WriteString(site + "- online: " + strconv.FormatBool(status) + "\n")
+	file.Close()
 }

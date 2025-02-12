@@ -1,0 +1,6 @@
+https://leosantos.me- online: true
+https://the-internet.herokuapp.com/status_codes/500- online: false
+https://leosantos.me- online: true
+https://the-internet.herokuapp.com/status_codes/500- online: false
+https://leosantos.me- online: true
+https://the-internet.herokuapp.com/status_codes/500- online: false
