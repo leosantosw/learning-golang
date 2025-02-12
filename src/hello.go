@@ -9,9 +9,10 @@ import (
 	"bufio"
 	"strings"
 	"strconv"
+	"io/ioutil"
 )
 
-const monitoringTimes = 3
+const monitoringTimes = 5
 const monitoringInterval = 5
 
 func main() {
@@ -25,7 +26,7 @@ func main() {
 			case 1:
 				startMonitoring()
 			case 2:
-				fmt.Println("Showing logs...")
+				showLogs()
 			case 3:
 				fmt.Println("Exiting...")
 				os.Exit(0)
@@ -116,4 +117,12 @@ func registerLog(site string, status bool) {
 	currentTime := time.Now().Format("02/01/2006 15:04:05")
 	file.WriteString(currentTime + " - " + site + "- online: " + strconv.FormatBool(status) + "\n")
 	file.Close()
+}
+
+func showLogs() {
+	file, err := ioutil.ReadFile("log.txt")
+	if err != nil {
+		fmt.Println("Error reading log file:", err)
+    }
+	fmt.Println(string(file))
 }
