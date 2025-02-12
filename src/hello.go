@@ -4,7 +4,11 @@ import (
 	"fmt"
 	"os"
 	"net/http"
+	"time"
 )
+
+const monitoringTimes = 3
+const monitoringInterval = 5
 
 func main() {
 	showIntroduction()
@@ -50,15 +54,16 @@ func readCommandLine() int {
 
 func startMonitoring() {
 	fmt.Println("Monitoring...")
-	// site := "https://leosantos.me/"
-
 	sites := []string {"https://leosantos.me", "https://the-internet.herokuapp.com/status_codes/500"}
 	
-	for _, site := range sites {
-		fmt.Println(healthCheck(site))
-	}
+	for i := 0; i < monitoringTimes; i++ {
+		for _, site := range sites {
+			fmt.Println(healthCheck(site))
+		}
+		time.Sleep(time.Second * monitoringInterval)
+		fmt.Println("")
+	} 
 	fmt.Println("")
-
 }
 
 func healthCheck(site string) string {
