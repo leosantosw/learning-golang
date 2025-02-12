@@ -8,9 +8,7 @@ func main() {
 	fmt.Println("2 - Exibir logs")
 	fmt.Println("3 - Sair do programa")
 
-	var command int
-	fmt.Scan(&command)
-	fmt.Println("O comando escolhido foi", command)
+	command := readCommandLine()
 
 	switch command {
 		case 1:
@@ -30,4 +28,10 @@ func showIntroduction() {
 	
 	fmt.Println("Olá,", name)
 	fmt.Println("Este programa está na versão", version)
+}
+
+func readCommandLine() int {
+	var command int 
+	fmt.Scan(&command)
+	return command
 }
