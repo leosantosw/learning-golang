@@ -16,7 +16,7 @@ const monitoringInterval = 5
 
 func main() {
 	showIntroduction()
-	
+
 	for {
 		showMenu() 
 		command := readCommandLine()
@@ -113,6 +113,7 @@ func registerLog(site string, status bool) {
 	if err != nil {
 		fmt.Println("Could not open log file", err)
 	}
-	file.WriteString(site + "- online: " + strconv.FormatBool(status) + "\n")
+	currentTime := time.Now().Format("02/01/2006 15:04:05")
+	file.WriteString(currentTime + " - " + site + "- online: " + strconv.FormatBool(status) + "\n")
 	file.Close()
 }
