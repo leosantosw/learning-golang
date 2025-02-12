@@ -1,8 +1,10 @@
 package main
 
-import "fmt"
-import "os"
-import "net/http"
+import (
+	"fmt"
+	"os"
+	"net/http"
+)
 
 func main() {
 	showIntroduction()
@@ -48,14 +50,22 @@ func readCommandLine() int {
 
 func startMonitoring() {
 	fmt.Println("Monitoring...")
-	site := "https://leosantos.me/"
-	fmt.Println("Monitoring site:", site)
-	response, error := http.Get(site)
-	fmt.Println("Error:", error)
+	// site := "https://leosantos.me/"
 
-	if response.StatusCode >= 200 && response.StatusCode < 300 {
-		fmt.Println("Site is up!")
-	} else {
-		fmt.Println("Site is down!")
+	sites := []string {"https://leosantos.me", "https://the-internet.herokuapp.com/status_codes/500"}
+	
+	for _, site := range sites {
+		fmt.Println(healthCheck(site))
 	}
+	fmt.Println("")
+
+}
+
+func healthCheck(site string) string {
+	res, _ := http.Get(site)
+	if res.StatusCode >= 200 && res.StatusCode < 300 {
+        return "Site " + site + " is up!"
+    } else {
+        return "Site " + site + " is down!"
+    }
 }
