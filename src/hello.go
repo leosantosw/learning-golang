@@ -11,14 +11,15 @@ func main() {
 
 	switch command {
 		case 1:
-			fmt.Println("Monitorando...")
+			fmt.Println("Monitoring...")
+			startMonitoring()
 		case 2:
-			fmt.Println("Exibindo logs...")
+			fmt.Println("Showing logs...")
 		case 3:
-			fmt.Println("Saindo do programa...")
+			fmt.Println("Exiting...")
 			os.Exit(0)
 		default:
-			fmt.Println("Comando inválido.")
+			fmt.Println("Invalid command")
 			os.Exit(-1)
 	}
 }
@@ -27,14 +28,14 @@ func showIntroduction() {
 	name := "Leo"
 	version := 1.0
 	
-	fmt.Println("Olá,", name)
-	fmt.Println("Este programa está na versão", version)
+	fmt.Println("Hi,", name)
+	fmt.Println("This program is in version", version)
 }
 
 func showMenu() {
-	fmt.Println("1 - Iniciar monitoramento")
-	fmt.Println("2 - Exibir logs")
-	fmt.Println("3 - Sair do programa")
+	fmt.Println("1 - Start monitoring")
+	fmt.Println("2 - Show logs")
+	fmt.Println("3 - Exit")
 }
 
 func readCommandLine() int {
@@ -42,3 +43,4 @@ func readCommandLine() int {
 	fmt.Scan(&command)
 	return command
 }
+
