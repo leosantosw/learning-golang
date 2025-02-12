@@ -6,21 +6,23 @@ import "net/http"
 
 func main() {
 	showIntroduction()
-	showMenu()
 
-	command := readCommandLine()
+	for {
+		showMenu() 
+		command := readCommandLine()
 
-	switch command {
-		case 1:
-			startMonitoring()
-		case 2:
-			fmt.Println("Showing logs...")
-		case 3:
-			fmt.Println("Exiting...")
-			os.Exit(0)
-		default:
-			fmt.Println("Invalid command")
-			os.Exit(-1)
+		switch command {
+			case 1:
+				startMonitoring()
+			case 2:
+				fmt.Println("Showing logs...")
+			case 3:
+				fmt.Println("Exiting...")
+				os.Exit(0)
+			default:
+				fmt.Println("Invalid command")
+				os.Exit(-1)
+		}
 	}
 }
 
@@ -49,7 +51,6 @@ func startMonitoring() {
 	site := "https://leosantos.me/"
 	fmt.Println("Monitoring site:", site)
 	response, error := http.Get(site)
-	fmt.Println("Response:", response)
 	fmt.Println("Error:", error)
 
 	if response.StatusCode >= 200 && response.StatusCode < 300 {
